@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions/todoActions';
 
+import { Container, Form, Button } from 'react-bootstrap';
+
 let AddTodo = ({ dispatch }) => {
   let input;
 
   return (
-    <div>
-      <form
+    <Container style={{ marginTop: '20px' }}>
+      <Form
         onSubmit={e => {
           e.preventDefault();
           if (!input.value.trim()) {
@@ -17,14 +19,21 @@ let AddTodo = ({ dispatch }) => {
           input.value = '';
         }}
       >
-        <input
-          ref={node => {
-            input = node;
-          }}
-        />
-        <button type="submit">Add Todo</button>
-      </form>
-    </div>
+        <Form.Group controlId="todo_input">
+          <Form.Control
+            size="lg"
+            type="text"
+            placeholder="Enter todo task"
+            ref={node => {
+              input = node;
+            }}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Add Todo
+        </Button>
+      </Form>
+    </Container>
   );
 };
 
