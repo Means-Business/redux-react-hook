@@ -1,24 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import store from './store';
+import {
+  addTodo,
+  toggleTodo,
+  setVisibilityFilter,
+  VisibilityFilters
+} from './actions/todoActions';
+
+import { Container, Row, Col } from 'react-bootstrap';
+
+console.log(store.getState());
+
+const unsubscribe = store.subscribe(() => console.log(store.getState()));
+
+// Dispatch some actions
+store.dispatch(addTodo('Learn about actions'));
+store.dispatch(addTodo('Learn about reducers'));
+store.dispatch(addTodo('Learn about store'));
+store.dispatch(toggleTodo(0));
+store.dispatch(toggleTodo(1));
+store.dispatch(setVisibilityFilter(VisibilityFilters.SHOW_COMPLETED));
+
+unsubscribe();
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <Row>
+          <Col xs md={{ span: 8, offset: 2 }}>
+            <h1>redux react</h1>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
